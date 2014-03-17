@@ -411,7 +411,7 @@ class marm_piwik {
     public function setPiwikParamsForDetails($oViewObject)
     {
         $oProduct =  $oViewObject->getProduct();
-        $oCategory = $oProduct->getCategory();
+        $oCategory = $oProduct->getActCategory();
         $this->addPushParams(
             'setEcommerceView',
             $oProduct->oxarticles__oxartnum->value,

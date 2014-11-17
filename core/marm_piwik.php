@@ -253,26 +253,13 @@ class marm_piwik {
      */
     public function setPiwikParamsForSearch($oViewObject)
     {
-        // seems like deprecated but needed for downwards compatibility
-        // better use $oViewObject->getArticleCount() at a later time
-        if($oViewObject->getPageNavigation()->NrOfPages > 0) {
-            $this->addPushParams(
-                'setCustomVariable',
-                1,
-                $this->_aConfig['searched_for_var_name']['value'],
-                $oViewObject->getSearchParamForHtml(),
-                'page'
-            );
-        }
-        else{
-            $this->addPushParams(
-                'setCustomVariable',
-                2,
-                $this->_aConfig['no_search_results_var_name']['value'],
-                $oViewObject->getSearchParamForHtml(),
-                'page'
-            );
-        }
+        $cntResults = $oViewObject->isEmptySearch() ? 0 : $oViewObject->getArticleCount();
+	$this->addPushParams(
+	    'trackSiteSearch',
+	    $oViewObject->getSearchParam(),
+	    false,
+	    $cntResults
+	);
     }
 
     /**

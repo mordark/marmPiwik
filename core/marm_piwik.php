@@ -327,7 +327,7 @@ class marm_piwik {
          * may NOT have getBasket method (for example Details)
          * @var oxBasket $oBasket
          */
-        $oBasket = oxSession::getInstance()->getBasket();
+        $oBasket = oxRegistry::getSession()->getBasket();
         $this->_setEcommerceItemsByBasket($oBasket);
         $this->addPushParams('trackEcommerceCartUpdate', $oBasket->getPrice()->getBruttoPrice());
     }
